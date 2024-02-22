@@ -1,4 +1,10 @@
 # Message Queues
+Note: Amit Gupta's changes.
+--------------------------------------------------------------------My changes is this code -----------------------------------------------------------
+for priority queue implementation, I have used Priorityqueue implementation from collection framework.
+  for comparison to provide priority i have used comparator, which i have added as a new class MessageComparator.
+Redis as a queue is also implemented in RedisQueueImpl and RedisQueueTest for testing methods.
+-----------------------------------------------------------------------------------------------------------------------------------------------
 
 This project is an implementation of message queue with basic features.
 
