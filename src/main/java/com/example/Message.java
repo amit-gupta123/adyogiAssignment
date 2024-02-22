@@ -1,5 +1,7 @@
 package com.example;
 
+import java.util.Comparator;
+
 public class Message {
   /** How many times this message has been delivered. */
   private int attempts;
@@ -53,4 +55,12 @@ public class Message {
   protected void incrementAttempts() {
     this.attempts++;
   }
+
+// amit's change
+  // to be used for comparing
+  public Long getVisibleFrom(){
+    return  this.visibleFrom;
+  }
+
+
 }

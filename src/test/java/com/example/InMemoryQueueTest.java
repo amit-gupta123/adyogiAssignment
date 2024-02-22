@@ -16,13 +16,11 @@ public class InMemoryQueueTest {
 	public void setup() {
 		qs = new InMemoryQueueService();
 	}
-	
-	
+
 	@Test
 	public void testSendMessage(){
 		qs.push(queueUrl, "Good message!");
 		Message msg = qs.pull(queueUrl);
-
 		assertNotNull(msg);
 		assertEquals("Good message!", msg.getBody());
 	}

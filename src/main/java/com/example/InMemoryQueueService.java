@@ -26,14 +26,27 @@ public class InMemoryQueueService implements QueueService {
     this.visibilityTimeout = Integer.parseInt(confInfo.getProperty("visibilityTimeout", "30"));
   }
 
+  // your original code
+
+
+  //@Override
+//  public void push(String queueUrl, String msgBody) {
+//    Queue<Message> queue = queues.get(queueUrl);
+//    if (queue == null) {
+//      queue = new ConcurrentLinkedQueue<>();
+//      queues.put(queueUrl, queue);
+//    }
+//    queue.add(new Message(msgBody));
+//  }
+
   @Override
-  public void push(String queueUrl, String msgBody) {
+  public void push(String queueUrl, String messageBody) {
     Queue<Message> queue = queues.get(queueUrl);
-    if (queue == null) {
-      queue = new ConcurrentLinkedQueue<>();
-      queues.put(queueUrl, queue);
+    if (queue == null){
+      queue = new PriorityQueue<>(new MessageComparator());
+      queues.put(queueUrl,queue);
     }
-    queue.add(new Message(msgBody));
+    queue.add(new Message(messageBody));
   }
 
   @Override
@@ -52,7 +65,6 @@ public class InMemoryQueueService implements QueueService {
       msg.setReceiptId(UUID.randomUUID().toString());
       msg.incrementAttempts();
       msg.setVisibleFrom(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(visibilityTimeout));
-
       return new Message(msg.getBody(), msg.getReceiptId());
     }
   }

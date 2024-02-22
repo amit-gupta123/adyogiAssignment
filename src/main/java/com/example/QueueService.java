@@ -1,5 +1,7 @@
 package com.example;
 
+import java.io.IOException;
+
 public interface QueueService {
   /** push a message onto a queue. */
   public void push(String queueUrl, String messageBody);
